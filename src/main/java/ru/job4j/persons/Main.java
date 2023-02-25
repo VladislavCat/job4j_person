@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.job4j.persons.repository.PersonRepository;
 
 @SpringBootApplication
-@ComponentScan("ru.job4j.persons.repository")
+@ComponentScan("ru.job4j.persons")
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

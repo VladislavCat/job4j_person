@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.persons.model.Person;
 import ru.job4j.persons.repository.PersonRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,10 +18,9 @@ public class PersonController {
     private final PersonRepository persons;
 
     @GetMapping("/")
-        public List<Person> findAll() {
-        List<Person> result = new ArrayList<>();
-        this.persons.findAll().iterator().forEachRemaining(result::add);
-        return result;
+    public List<Person> findAll() {
+        persons.findAll().forEach(System.out::println);
+        return persons.findAll();
     }
 
     @GetMapping("/{id}")
