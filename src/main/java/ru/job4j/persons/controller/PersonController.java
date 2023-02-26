@@ -1,12 +1,11 @@
 package ru.job4j.persons.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.persons.model.Person;
-import ru.job4j.persons.repository.PersonRepository;
+import ru.job4j.persons.service.PersonService;
 
 import java.util.List;
 
@@ -14,12 +13,10 @@ import java.util.List;
 @RequestMapping("/person")
 @AllArgsConstructor
 public class PersonController {
-    @Autowired
-    private final PersonRepository persons;
+    private final PersonService persons;
 
     @GetMapping("/")
     public List<Person> findAll() {
-        persons.findAll().forEach(System.out::println);
         return persons.findAll();
     }
 
@@ -42,16 +39,18 @@ public class PersonController {
 
     @PutMapping("/")
     public ResponseEntity<Void> update(@RequestBody Person person) {
-        this.persons.save(person);
-        return ResponseEntity.ok().build();
+        return this.persons.save(person).getId() != 0 ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
         Person person = new Person();
         person.setId(id);
+        if (persons.findById(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         this.persons.delete(person);
-        return ResponseEntity.ok().build();
+        return persons.findById(id).isEmpty() ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 }
 
