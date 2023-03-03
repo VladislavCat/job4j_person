@@ -5,8 +5,6 @@ import java.util.Objects;
 public abstract class Id {
     protected int id;
 
-    public Id() {}
-
     public int getId() {
         return id;
     }
