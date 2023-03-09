@@ -11,6 +11,8 @@ public class User extends Id {
 
     private String username;
 
+    private boolean statusUser;
+
     private List<Account> accounts = new CopyOnWriteArrayList<>();
 
     public User(String passport, String username) {
@@ -40,6 +42,14 @@ public class User extends Id {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public boolean isStatusUser() {
+        return statusUser;
+    }
+
+    public void setStatusUser(boolean statusUser) {
+        this.statusUser = statusUser;
     }
 
     @Override
