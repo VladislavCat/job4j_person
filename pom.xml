@@ -141,7 +141,7 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <configuration>
-                            <configLocation>C:\projects\job4j_persons\checkstyle.xml</configLocation>
+                            <configLocation> ..\job4j_persons\checkstyle.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>
