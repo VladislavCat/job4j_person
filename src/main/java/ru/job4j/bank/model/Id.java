@@ -1,8 +1,12 @@
 package ru.job4j.bank.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public abstract class Id {
+    @NotNull(message = "Id must be non null", groups = {
+            Operations.OnUpdate.class, Operations.OnDelete.class
+    })
     protected int id;
 
     public int getId() {

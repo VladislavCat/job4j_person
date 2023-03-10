@@ -1,9 +1,11 @@
 package ru.job4j.bank.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Account extends Id {
-
+    @NotBlank(message = "Requisite must be non null")
     private String requisite;
 
     private double balance;

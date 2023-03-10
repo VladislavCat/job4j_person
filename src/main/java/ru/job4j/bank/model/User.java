@@ -1,14 +1,17 @@
 package ru.job4j.bank.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class User extends Id {
-
-
+    @NotEmpty(message = "Passport must be non null")
     private String passport;
-
+    @NotEmpty(message = "Username must be non null")
     private String username;
 
     private boolean statusUser;

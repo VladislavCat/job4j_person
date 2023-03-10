@@ -4,13 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import ru.job4j.bank.model.Operations;
 import ru.job4j.bank.model.User;
 import ru.job4j.bank.service.BankService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +34,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User save(@RequestBody Map<String, String> body) {
+    @Validated(Operations.OnCreate.class)
+    public User save(@Valid @RequestBody Map<String, String> body) {
         var passport = body.get("passport");
         var username = body.get("username");
         if (username == null || passport == null) {
