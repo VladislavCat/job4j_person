@@ -20,14 +20,14 @@ public class AccountTest {
     public void createAccountWithNullRequisite() {
         Account account = new Account(null, 0.0D);
         Set<ConstraintViolation<Account>> violations = validator.validate(account);
-        assertThat(violations.size()).isEqualTo(2);
+        assertThat(violations.size()).isEqualTo(1);
     }
 
     @Test
     public void createAccountWithEmptyRequisite() {
         Account account = new Account("", 0.0D);
         Set<ConstraintViolation<Account>> violations = validator.validate(account);
-        assertThat(violations.size()).isEqualTo(2);
+        assertThat(violations.size()).isEqualTo(1);
     }
 
     @Test

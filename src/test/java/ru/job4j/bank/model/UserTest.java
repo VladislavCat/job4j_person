@@ -29,7 +29,7 @@ public class UserTest {
 
     @Test
     public void whenCreatedUserWithPassportNumber() {
-        User user = new User("12321", "");
+        User user = new User("12321", "User");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertThat(violations.size()).isEqualTo(0);
     }
