@@ -3,10 +3,13 @@ package ru.job4j.persons.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.bank.model.Operations;
 import ru.job4j.persons.model.Person;
 import ru.job4j.persons.service.PersonService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +33,8 @@ public class PersonController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Person> create(@RequestBody Person person) {
+    @Validated(Operations.OnCreate.class)
+    public ResponseEntity<Person> create(@Valid @RequestBody Person person) {
         return new ResponseEntity<Person>(
                 this.persons.save(person),
                 HttpStatus.CREATED
@@ -38,7 +42,8 @@ public class PersonController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Void> update(@RequestBody Person person) {
+    @Validated(Operations.OnUpdate.class)
+    public ResponseEntity<Void> update(@Valid @RequestBody Person person) {
         return this.persons.save(person).getId() != 0 ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
